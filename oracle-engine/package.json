@@ -1,0 +1,19 @@
+{
+    "name": "djinn-oracle",
+    "version": "1.0.0",
+    "type": "module",
+    "main": "src/index.ts",
+    "scripts": {
+        "gauntlet": "node --loader ts-node/esm src/gauntlet.ts"
+    },
+    "dependencies": {
+        "@solana/web3.js": "^1.87.6",
+        "@project-serum/anchor": "^0.26.0",
+        "axios": "^1.6.0",
+        "dotenv": "^16.0.0"
+    },
+    "devDependencies": {
+        "ts-node": "^10.9.2",
+        "typescript": "^5.3.3"
+    }
+}
