@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerberus Oracle - Market Verification Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <span class="logo-icon">🐕</span>
+                    <span class="logo-text">CERBERUS</span>
+                    <span class="logo-subtitle">Oracle</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="status-badge" id="status-badge">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Connecting...</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="last-update" id="last-update">
+                    Last update: --
+                </div>
+            </div>
+        </header>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-icon total">📊</div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-total">0</span>
+                    <span class="stat-label">Total Markets</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon verified">✅</div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-verified">0</span>
+                    <span class="stat-label">Verified</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon flagged">⚠️</div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-flagged">0</span>
+                    <span class="stat-label">Flagged</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon rejected">❌</div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-rejected">0</span>
+                    <span class="stat-label">Rejected</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon pending">⏳</div>
+                <div class="stat-info">
+                    <span class="stat-value" id="stat-pending">0</span>
+                    <span class="stat-label">Pending</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Markets List -->
+            <div class="markets-panel">
+                <div class="panel-header">
+                    <h2>Markets Queue</h2>
+                    <div class="polling-indicator" id="polling-indicator">
+                        <span class="polling-dot"></span>
+                        Polling every 3 min
+                    </div>
+                </div>
+                <div class="markets-list" id="markets-list">
+                    <!-- Markets will be inserted here -->
+                    <div class="empty-state">
+                        <span class="empty-icon">🔍</span>
+                        <p>Waiting for markets...</p>
+                        <small>New markets will appear here automatically</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Verification Details -->
+            <div class="details-panel" id="details-panel">
+                <div class="panel-header">
+                    <h2>Verification Details</h2>
+                </div>
+                <div class="details-content" id="details-content">
+                    <div class="empty-state">
+                        <span class="empty-icon">👈</span>
+                        <p>Select a market to view details</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- AI Description Modal -->
+        <div class="modal" id="description-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>AI Generated Description</h3>
+                    <button class="modal-close" onclick="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <!-- Description content -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
