@@ -16,3 +16,8 @@ dist/
 !package.json
 !tsconfig.json
 !vercel.json
+
+# Oracle Data
+oracle/data/
+*.db
+*.sqlite
