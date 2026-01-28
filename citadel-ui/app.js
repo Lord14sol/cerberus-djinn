@@ -3,7 +3,8 @@
 // Real-time market verification dashboard
 // ============================================
 
-const API_URL = 'http://localhost:3001/api';
+// Use relative URL so it works on any host/port
+const API_URL = '/api';
 let eventSource = null;
 let selectedMarketId = null;
 let dashboardState = {

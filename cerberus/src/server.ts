@@ -5,14 +5,23 @@
 
 import express, { Request, Response } from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { CerberusOrchestrator, createOrchestrator } from './orchestrator.js';
 import { CerberusConfig, DEFAULT_CONFIG, DashboardState } from './types.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Serve static files from citadel-ui (Dashboard Frontend)
+const uiPath = path.join(__dirname, '../../citadel-ui');
+app.use(express.static(uiPath));
 
 // Store for SSE clients
 const sseClients: Set<Response> = new Set();
@@ -215,16 +224,22 @@ export async function startServer(config?: Partial<CerberusConfig>): Promise<voi
         broadcastEvent('market_rejected', verdict);
     });
 
+    // Serve index.html for root route
+    app.get('/', (req: Request, res: Response) => {
+        res.sendFile(path.join(uiPath, 'index.html'));
+    });
+
     // Start server
     app.listen(port, () => {
         console.log(`
 ╔══════════════════════════════════════════════════════════════╗
 ║                                                              ║
-║   🐕 CERBERUS API SERVER STARTED 🐕                         ║
+║   🐕 CERBERUS ORACLE SERVER STARTED 🐕                      ║
 ║                                                              ║
-║   Port: ${port}                                               ║
-║   Dashboard: http://localhost:${port}/api/dashboard           ║
-║   Events: http://localhost:${port}/api/events (SSE)           ║
+║   🌐 Dashboard: http://localhost:${port}                      ║
+║   📡 API:       http://localhost:${port}/api                  ║
+║                                                              ║
+║   Open your browser and go to: http://localhost:${port}       ║
 ║                                                              ║
 ╚══════════════════════════════════════════════════════════════╝
         `);
